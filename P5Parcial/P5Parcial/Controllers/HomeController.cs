@@ -13,5 +13,11 @@ namespace P5Parcial.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Registrar()
+        {
+            return View();
+        }
     }
 }
