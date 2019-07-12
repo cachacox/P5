@@ -120,8 +120,10 @@
     <Content Include="Bootstrap\bootstrap-grid.css" />
     <Content Include="Bootstrap\bootstrap.css" />
     <Content Include="Bootstrap\bootstrap.js" />
+    <Content Include="Bootstrap\mycss.css" />
     <Content Include="Global.asax" />
     <Content Include="imagenes\background.jpg" />
+    <Content Include="imagenes\background1.jpg" />
     <Content Include="imagenes\iso.png" />
     <Content Include="imagenes\logo2.png" />
     <Content Include="imagenes\uh.ico" />

@@ -10,10 +10,43 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Registrar</title>
+    <link href="~/Bootstrap/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="~/Bootstrap/mycss.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        <h1>registrarse</h1> 
+    <div class="cuerpo">
+        <div class="row">
+            <img class="col-md-6" src="~/imagenes/background1.jpg" />
+            <div style="border-style:ridge;border-color:grey;border-radius:5px" class="col-md-6">
+                        <table>
+                            <tr>
+                                <td><br />Usuario</td>
+                            </tr>
+                            <tr>                                
+                                <td><br />Correo</td>
+                            </tr>
+                            <tr>
+                                <td><br />Contraseña</td>
+                            </tr>
+                        </table>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.ValidationSummary()
+                            <table>
+                                <tr>
+                                    <td>@Html.TextBoxFor(x => x.nombreusuario, new { @class = "form-control" })</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.TextBoxFor(x => x.correo, new { @class = "form-control" })</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.TextBoxFor(x => x.contrasena, new { @class = "form-control" })</td>
+                                </tr>
+                            </table>
+                        }
+        </div>
     </div>
+        </div>
 </body>
 </html>
