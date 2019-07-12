@@ -18,32 +18,27 @@
     <div class="cuerpo">
         <div class="row">
             <img class="col-md-6" src="~/imagenes/background1.jpg" />
-            <div style="border-style:ridge;border-color:grey;border-radius:5px" class="col-md-6">
-                        <table>
-                            <tr>
-                                <td><br />Usuario</td>
-                            </tr>
-                            <tr>                                
-                                <td><br />Correo</td>
-                            </tr>
-                            <tr>
-                                <td><br />Contraseña</td>
-                            </tr>
-                        </table>
+            <div style="border-style:ridge;border-color:grey;border-radius:5px;padding-top:100px" class="col-md-6">
                         @using (Html.BeginForm())
                         {
                             @Html.ValidationSummary()
-                            <table>
+                            <table align="center">
                                 <tr>
-                                    <td>@Html.TextBoxFor(x => x.nombreusuario, new { @class = "form-control" })</td>
+                                    <td>Usuario:</td>
+                                    <td class="margenCol">@Html.TextBoxFor(x => x.nombreusuario, new { @class = "form-control" })</td>
                                 </tr>
                                 <tr>
-                                    <td>@Html.TextBoxFor(x => x.correo, new { @class = "form-control" })</td>
+                                    <td>Correo:         </td>
+                                    <td class="margenCol">@Html.TextBoxFor(x => x.correo, new { @class = "form-control" })</td>
                                 </tr>
                                 <tr>
-                                    <td>@Html.TextBoxFor(x => x.contrasena, new { @class = "form-control" })</td>
+                                    <td>Contraseña:     </td>
+                                    <td class="margenCol">@Html.TextBoxFor(x => x.contrasena, new { @class = "form-control" })</td>
                                 </tr>
                             </table>
+                            <div style="text-align:center;padding-top:20px">
+                                <input class="btn btn-primary" type="submit" value="Registrarse" />
+                            </div>
                         }
         </div>
     </div>
