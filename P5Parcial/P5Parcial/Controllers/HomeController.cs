@@ -33,7 +33,7 @@ namespace P5Parcial.Controllers
                 DataTable tabla = new DataTable();
                 tabla = objMetodos.Consulta(userr.correo);
 
-                if (tabla >0)
+                if (tabla.Rows.Count >0)
                 {
                     if (tabla.Rows[0][1].ToString() == userr.correo && tabla.Rows[0][2].ToString() == userr.contrasena)
                     {
@@ -47,8 +47,8 @@ namespace P5Parcial.Controllers
                 }
                 else
                 {
-                    return View();
                     ViewBag.mensaje = "Usuario no existe, regístrese";
+                    return View();
                 }           
             }
             else
