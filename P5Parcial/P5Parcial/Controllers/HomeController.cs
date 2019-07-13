@@ -32,17 +32,28 @@ namespace P5Parcial.Controllers
                 MetodosUser objMetodos = new MetodosUser();
                 DataTable tabla = new DataTable();
                 tabla = objMetodos.Consulta(userr.correo);
-                if (tabla.Rows[0][1].ToString() ==  "cacha@null.com")
+
+                if (tabla >0)
                 {
-                    return View("Ingresar");
+                    if (tabla.Rows[0][1].ToString() == userr.correo && tabla.Rows[0][2].ToString() == userr.contrasena)
+                    {
+                        return View("Ingresar");
+                    }
+                    else
+                    {
+                        ViewBag.mensaje = "Contraseña o Usuario inválido";
+                        return View();
+                    }
                 }
                 else
                 {
                     return View();
-                }            
+                    ViewBag.mensaje = "Usuario no existe, regístrese";
+                }           
             }
             else
             {
+                ViewBag.mensaje = "Debe completar todos los campos";
                 return View();
             }
         }

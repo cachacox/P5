@@ -28,14 +28,13 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Correo Electrónico</label>
                                     @Html.TextBoxFor(x => x.correo, new { @class = "form-control" })
-                                    @*<input type="text" class="form-control" name="username">*@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Password</label>
                                     @Html.TextBoxFor(x => x.contrasena, new { @class = "form-control" })
-                                    @*<input type="password" class="form-control" name="password">*@
                                 </div>
                                 <input class="btn btn-primary" type="submit" value="Login" />
+                                <label style="color:red; display:block">@ViewBag.mensaje</label>
                             </form>
                             }
                         </div>
