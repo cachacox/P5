@@ -19,7 +19,9 @@ namespace P5Parcial.Models
             {
                 conexion.Open();
                 if (comando == null)
+                {
                     comando = new SqlCommand();
+                }
 
                 comando.Connection = conexion;
                 comando.CommandType = CommandType.Text;
