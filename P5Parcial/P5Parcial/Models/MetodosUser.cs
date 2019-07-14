@@ -37,7 +37,8 @@ namespace P5Parcial.Models
             }
         }
 
-        public void Insertar(string correo, string contrasena, string nombreusuario) {
+        public void Insertar(string correo, string contrasena, string nombreusuario)
+        {
             StringBuilder sqlQuery = new StringBuilder();
             SqlCommand comando = new SqlCommand();
             int resultado = 0;
@@ -55,6 +56,44 @@ namespace P5Parcial.Models
 
                 throw;
             }
+        }
+
+        public double TMB(int sexo, int altura, int peso, int frecuencia, int edad) {
+            double tmb = 0;
+            int calNec = frecuencia;
+            double multip = 0;
+
+            switch (calNec)
+            {
+                case 1:
+                    multip = 1.2;
+                    break;
+                case 2:
+                    multip = 1.375;
+                    break;
+                case 3:
+                    multip = 1.55;
+                    break;
+                case 4:
+                    multip = 1.725;
+                    break;
+                case 5:
+                    multip = 1.9;
+                    break;
+            }
+
+
+            if (sexo == 1)   //hombre
+            {
+                tmb = ((10* peso) +(6.25* altura)-(5* edad) +(5));
+                tmb = tmb * multip;
+            }
+            else if (sexo == 2)  //mujer
+            {
+                tmb = ((10 * peso) + (6.25 * altura) - (5 * edad) - (161));
+                tmb = tmb * multip;
+            }
+            return tmb;
         }
     }
 }

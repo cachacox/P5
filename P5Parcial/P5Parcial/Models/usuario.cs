@@ -12,12 +12,18 @@ namespace P5Parcial.Models
         public string nombreusuario { get; set; }
         public int peso { get; set; }
         public int altura { get; set; }
+        public int sexo { get; set; }
+        public int frecuencia { get; set; }
 
         public usuario()
         {
             correo = "";
             contrasena = "";
             nombreusuario = "";
+            peso = 0;
+            altura = 0;
+            sexo = 0;
+            frecuencia = 0;
         }
     }
 }

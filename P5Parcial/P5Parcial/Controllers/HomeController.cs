@@ -62,7 +62,11 @@ namespace P5Parcial.Controllers
                 return View();
             }
         }
-     
+
+        public ActionResult Registrar(usuario ussuario) {
+
+            return View("Ingresar");
+        }
 
     }
 }

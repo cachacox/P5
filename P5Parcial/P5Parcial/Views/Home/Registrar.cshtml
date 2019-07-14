@@ -18,7 +18,7 @@
     <div class="cuerpo">
         <div class="row">
             <img class="col-md-6" src="~/imagenes/background1.jpg" />
-            <div style="border-style:ridge;border-color:grey;border-radius:5px;padding-top:100px" class="col-md-6">
+            <div style="border-style:ridge;border-color:grey;border-radius:5px;padding-top:60px" class="col-md-6">
                 @using (Html.BeginForm())
                 {
                     @Html.ValidationSummary()
@@ -35,6 +35,33 @@
                             <td>Contraseña:     </td>
                             <td class="margenCol">@Html.TextBoxFor(x => x.contrasena, new { @class = "form-control" })</td>
                         </tr>
+                        <tr>
+                            <td>Peso:     </td>
+                            <td class="margenCol">@Html.TextBoxFor(x => x.peso, new { @class = "form-control" })</td>
+                        </tr>
+                        <tr>
+                            <td>Altura:     </td>
+                            <td class="margenCol">@Html.TextBoxFor(x => x.altura, new { @class = "form-control" })</td>
+                        </tr>
+                        <tr>
+                            <td>Sexo:     </td>
+                            <td class="margenCol">@Html.DropDownListFor(x => x.sexo, new[] {
+                                                new SelectListItem() { Text="Masculino", Value = "1"},
+                                                new SelectListItem() { Text="Femenino", Value = "2" }
+                          })</td>
+                        </tr>
+                        <tr>
+                            <td>Sexo:     </td>
+                            <td class="margenCol">
+                                @Html.DropDownListFor(x => x.frecuencia, new[] {
+                                                new SelectListItem() { Text="Poco o ningún ejercicio", Value = "1"},
+                                                new SelectListItem() { Text="Ejercicio ligero (1-3 días por semana)", Value = "2" },
+                                                new SelectListItem() { Text="Ejercicio Moderado (3-5 días por semana)", Value = "3" },
+                                                new SelectListItem() { Text="Ejercicio Fuerte (6 días por semana)", Value = "4" },
+                                                new SelectListItem() { Text="Ejercicio profesional o extremo", Value = "5" }
+                          })
+                        </td>
+                    </tr>
                     </table>
                     <div style="text-align:center;padding-top:20px">
                         <input class="btn btn-primary" type="submit" value="Registrarse" />
