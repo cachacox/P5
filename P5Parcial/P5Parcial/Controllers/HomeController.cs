@@ -23,7 +23,12 @@ namespace P5Parcial.Controllers
             return View();
         }
 
-         [HttpPost]
+        public ActionResult Ingresar()
+        {
+            return View();
+        }
+
+        [HttpPost]
 
         public ActionResult Index(usuario userr)
         {

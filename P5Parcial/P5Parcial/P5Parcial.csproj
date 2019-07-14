@@ -138,7 +138,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\capaDatos.cs" />
-    <Compile Include="Models\dieta.cs" />
     <Compile Include="Models\MetodosUser.cs" />
     <Compile Include="Models\usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
