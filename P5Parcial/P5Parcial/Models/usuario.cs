@@ -14,6 +14,10 @@ namespace P5Parcial.Models
         public int altura { get; set; }
         public int sexo { get; set; }
         public int frecuencia { get; set; }
+        public double tmb { get; set; }
+        public double imc { get; set; }
+        public int edad { get; set; }
+        public int kxp { get; set; }
 
         public usuario()
         {
@@ -24,6 +28,10 @@ namespace P5Parcial.Models
             altura = 0;
             sexo = 0;
             frecuencia = 0;
+            tmb = 0.0;
+            imc = 0.0;
+            edad = 0;
+            kxp = 0;
         }
     }
 }

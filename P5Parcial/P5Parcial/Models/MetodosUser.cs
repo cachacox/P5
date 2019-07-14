@@ -37,31 +37,39 @@ namespace P5Parcial.Models
             }
         }
 
-        public void Insertar(string correo, string contrasena, string nombreusuario)
+        public void Insertar(string correo, string contrasena, string nombreusuario, int peso, int altura, int sexo, int frecuencia, double tmb, double imc, int kxp, int edad)
         {
             StringBuilder sqlQuery = new StringBuilder();
             SqlCommand comando = new SqlCommand();
             int resultado = 0;
             try
             {
-                sqlQuery.Append(" insert into usuario values(@correo, @contrasena, @nombreusuario) ");
+                sqlQuery.Append(" insert into usuarios values(@correo, @contrasena, @nombreusuario, @peso, @altura, @sexo, @frecuencia, @tmb, @imc, @edad, @kxp) ");
                 comando.Parameters.Add("@correo", SqlDbType.NVarChar).Value = correo.Trim();
                 comando.Parameters.Add("@contrasena", SqlDbType.NVarChar).Value = contrasena.Trim();
                 comando.Parameters.Add("@nombreusuario", SqlDbType.NVarChar).Value = nombreusuario.Trim();
+                comando.Parameters.Add("@peso", SqlDbType.Int).Value = peso;
+                comando.Parameters.Add("@altura", SqlDbType.Int).Value = altura;
+                comando.Parameters.Add("@sexo", SqlDbType.Int).Value = sexo;
+                comando.Parameters.Add("@frecuencia", SqlDbType.Int).Value = frecuencia;
+                comando.Parameters.Add("@tmb", SqlDbType.Float).Value = tmb;
+                comando.Parameters.Add("@imc", SqlDbType.Float).Value = imc;                
+                comando.Parameters.Add("@edad", SqlDbType.Int).Value = edad;
+                comando.Parameters.Add("@kxp", SqlDbType.Int).Value = kxp;
                 resultado = objCapaDatos.Insertar(sqlQuery, comando);
 
             }
             catch (Exception)
             {
-
-                throw;
+                throw new Exception("Error al insertar");
             }
         }
 
-        public double TMB(int sexo, int altura, int peso, int frecuencia, int edad) {
+        public double TMB(int sexo, int altura, int peso, int frecuencia, int edad, int kxp) {
             double tmb = 0;
             int calNec = frecuencia;
-            double multip = 0;
+            double multip = 0.0;
+            int kg = 0;
 
             switch (calNec)
             {
@@ -82,18 +90,39 @@ namespace P5Parcial.Models
                     break;
             }
 
+            switch (kxp)
+            {
+                case 1:
+                    kg = 1000;
+                    break;
+                case 2:
+                    kg = 500;
+                    break;
+            }
 
             if (sexo == 1)   //hombre
             {
                 tmb = ((10* peso) +(6.25* altura)-(5* edad) +(5));
-                tmb = tmb * multip;
+                tmb = (tmb * multip) - kg;
             }
             else if (sexo == 2)  //mujer
             {
                 tmb = ((10 * peso) + (6.25 * altura) - (5 * edad) - (161));
-                tmb = tmb * multip;
+                tmb = (tmb * multip) - kg;
             }
             return tmb;
+        }
+
+        public double IMC(int peso, int altura) {
+            double indice = 0.0;
+            double alturadouble = altura;
+            alturadouble = alturadouble / 100;
+
+            if (peso>0 || altura>0)
+            {
+                indice = Math.Round(((peso)/(Math.Pow(alturadouble, 2))),2);
+            }
+            return indice;
         }
     }
 }

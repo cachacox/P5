@@ -51,12 +51,12 @@ namespace P5Parcial.Models
                 resultado = comando.ExecuteNonQuery();
                 conexion.Close();
                 return resultado;
-            }
+        }
             catch (Exception ex)
             {
                 conexion.Close();
                 throw new Exception("Error en Capa de Datos" + ex.Message);
-            }
-        }
+    }
+}
     }
 }

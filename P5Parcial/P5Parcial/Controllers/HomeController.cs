@@ -64,8 +64,22 @@ namespace P5Parcial.Controllers
         }
 
         public ActionResult Registrar(usuario ussuario) {
-
-            return View("Ingresar");
+            if (ModelState.IsValid)
+            {
+                //ACA TENGO QUE METER UN METODO PARA QUE REVISE SI YA EXISTE EL USUARIO//
+                MetodosUser objMetodos = new MetodosUser();
+                DataTable tabla = new DataTable();
+                double tmb = 0.0;
+                double imc = 0.0;
+                tmb = objMetodos.TMB(ussuario.sexo, ussuario.altura, ussuario.peso, ussuario.frecuencia, ussuario.edad,ussuario.kxp);
+                imc = objMetodos.IMC(ussuario.peso,ussuario.altura);
+                objMetodos.Insertar(ussuario.correo, ussuario.contrasena, ussuario.nombreusuario, ussuario.peso, ussuario.altura, ussuario.sexo, ussuario.frecuencia, tmb, imc,ussuario.kxp, ussuario.edad);
+                return View("Ingresar");
+            }
+            else
+            {
+                return View();
+            }            
         }
 
     }

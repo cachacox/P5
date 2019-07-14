@@ -18,7 +18,7 @@
     <div class="cuerpo">
         <div class="row">
             <img class="col-md-6" src="~/imagenes/background1.jpg" />
-            <div style="border-style:ridge;border-color:grey;border-radius:5px;padding-top:60px" class="col-md-6">
+            <div style="border-style:ridge;border-color:grey;border-radius:5px;padding-top:40px" class="col-md-6">
                 @using (Html.BeginForm())
                 {
                     @Html.ValidationSummary()
@@ -44,6 +44,10 @@
                             <td class="margenCol">@Html.TextBoxFor(x => x.altura, new { @class = "form-control" })</td>
                         </tr>
                         <tr>
+                            <td>Edad:     </td>
+                            <td class="margenCol">@Html.TextBoxFor(x => x.edad, new { @class = "form-control" })</td>
+                        </tr>
+                        <tr>
                             <td>Sexo:     </td>
                             <td class="margenCol">@Html.DropDownListFor(x => x.sexo, new[] {
                                                 new SelectListItem() { Text="Masculino", Value = "1"},
@@ -51,7 +55,16 @@
                           })</td>
                         </tr>
                         <tr>
-                            <td>Sexo:     </td>
+                            <td>Cuantos kilos quiere perder por semana?:     </td>
+                            <td class="margenCol">
+                                @Html.DropDownListFor(x => x.kxp, new[] {
+                                                new SelectListItem() { Text="1 Kg", Value = "1"},
+                                                new SelectListItem() { Text="0.5 Kg", Value = "2" }
+                          })
+                        </td>
+                    </tr>
+                        <tr>
+                            <td>Frecuencia con que se ejercita:     </td>
                             <td class="margenCol">
                                 @Html.DropDownListFor(x => x.frecuencia, new[] {
                                                 new SelectListItem() { Text="Poco o ningún ejercicio", Value = "1"},
