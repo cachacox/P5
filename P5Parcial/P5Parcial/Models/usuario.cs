@@ -7,6 +7,7 @@ namespace P5Parcial.Models
 {
     public class usuario
     {
+        public int iduser { get; set; }
         public string correo { get; set; }
         public string contrasena { get; set; }
         public string nombreusuario { get; set; }
@@ -21,6 +22,7 @@ namespace P5Parcial.Models
 
         public usuario()
         {
+            iduser = 0;
             correo = "";
             contrasena = "";
             nombreusuario = "";

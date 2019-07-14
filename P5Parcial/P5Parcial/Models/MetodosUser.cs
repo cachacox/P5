@@ -12,7 +12,8 @@ namespace P5Parcial.Models
     {
         capaDatos objCapaDatos = new capaDatos();
 
-        public DataTable Consulta(string id = "") {
+        public DataTable Consulta(string id = "")
+        {
             StringBuilder sqlQuery = new StringBuilder();
             SqlCommand comando = new SqlCommand();
             DataTable tabla = new DataTable();
@@ -28,6 +29,27 @@ namespace P5Parcial.Models
                 else
                 {
                     tabla = objCapaDatos.EjecutarConsulta(sqlQuery);
+                }
+                return tabla;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error en la consulta");
+            }
+        }
+
+        public DataTable consultaProg(int id)
+        {
+            StringBuilder sqlQuery = new StringBuilder();
+            SqlCommand comando = new SqlCommand();
+            DataTable tabla = new DataTable();
+            try
+            {
+                sqlQuery.Append(" Select * from progreso where iduser = @usuario ");
+                if (id > 0)
+                {
+                    comando.Parameters.Add("@usuario", SqlDbType.Int).Value = id;
+                    tabla = objCapaDatos.EjecutarConsulta(sqlQuery, comando);
                 }
                 return tabla;
             }
@@ -123,6 +145,26 @@ namespace P5Parcial.Models
                 indice = Math.Round(((peso)/(Math.Pow(alturadouble, 2))),2);
             }
             return indice;
+        }
+
+        public void InsertarProgreso(int idusuario, int prog_peso, double prog_imc)
+        {
+            StringBuilder sqlQuery = new StringBuilder();
+            SqlCommand comando = new SqlCommand();
+            int resultado = 0;
+            try
+            {
+                sqlQuery.Append(" insert into progreso values(@iduser, @progreso_peso, @progreso_imc) ");
+                comando.Parameters.Add("@iduser", SqlDbType.Int).Value = idusuario;
+                comando.Parameters.Add("@progreso_peso", SqlDbType.Int).Value = prog_peso;
+                comando.Parameters.Add("@progreso_imc", SqlDbType.Float).Value = prog_imc;
+                resultado = objCapaDatos.Insertar(sqlQuery, comando);
+
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error al insertar progreso");
+            }
         }
     }
 }

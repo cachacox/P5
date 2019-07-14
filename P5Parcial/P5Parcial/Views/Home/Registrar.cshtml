@@ -59,7 +59,7 @@
                             <td class="margenCol">
                                 @Html.DropDownListFor(x => x.kxp, new[] {
                                                 new SelectListItem() { Text="1 Kg", Value = "1"},
-                                                new SelectListItem() { Text="0.5 Kg", Value = "2" }
+                                                new SelectListItem() { Text="0.5 Kg", Value = "2"}
                           })
                         </td>
                     </tr>
@@ -78,6 +78,7 @@
                     </table>
                     <div style="text-align:center;padding-top:20px">
                         <input class="btn btn-primary" type="submit" value="Registrarse" />
+                        <label style="color:red; display:block">@ViewBag.msg</label>
                     </div>
                 }
             </div>

@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="Models\capaDatos.cs" />
     <Compile Include="Models\MetodosUser.cs" />
+    <Compile Include="Models\parentModel.cs" />
     <Compile Include="Models\usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

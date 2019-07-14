@@ -23,7 +23,7 @@ namespace P5Parcial.Controllers
             return View();
         }
 
-        public ActionResult Ingresar()
+        public ActionResult Ingresar(int id)
         {
             return View();
         }
@@ -36,13 +36,20 @@ namespace P5Parcial.Controllers
             {
                 MetodosUser objMetodos = new MetodosUser();
                 DataTable tabla = new DataTable();
+                DataTable temptabla = new DataTable();
+                int idu = 0;
                 tabla = objMetodos.Consulta(userr.correo);
-
                 if (tabla.Rows.Count >0)
                 {
+                    idu = Convert.ToInt32(tabla.Rows[0][0]);
                     if (tabla.Rows[0][1].ToString() == userr.correo && tabla.Rows[0][2].ToString() == userr.contrasena)
                     {
-                        return View("Ingresar");
+                        temptabla = objMetodos.consultaProg(idu);
+                        if (temptabla.Rows.Count == 0)
+                        {
+                            objMetodos.InsertarProgreso(idu, Convert.ToInt32(tabla.Rows[0][4]), Convert.ToInt32(tabla.Rows[0][9]));
+                        }
+                        return View("Ingresar",idu);
                     }
                     else
                     {
@@ -64,20 +71,29 @@ namespace P5Parcial.Controllers
         }
 
         public ActionResult Registrar(usuario ussuario) {
+            MetodosUser objMetodos = new MetodosUser();
+            DataTable tabla = new DataTable();
             if (ModelState.IsValid)
             {
-                //ACA TENGO QUE METER UN METODO PARA QUE REVISE SI YA EXISTE EL USUARIO//
-                MetodosUser objMetodos = new MetodosUser();
-                DataTable tabla = new DataTable();
-                double tmb = 0.0;
-                double imc = 0.0;
-                tmb = objMetodos.TMB(ussuario.sexo, ussuario.altura, ussuario.peso, ussuario.frecuencia, ussuario.edad,ussuario.kxp);
-                imc = objMetodos.IMC(ussuario.peso,ussuario.altura);
-                objMetodos.Insertar(ussuario.correo, ussuario.contrasena, ussuario.nombreusuario, ussuario.peso, ussuario.altura, ussuario.sexo, ussuario.frecuencia, tmb, imc,ussuario.kxp, ussuario.edad);
-                return View("Ingresar");
+                tabla = objMetodos.Consulta(ussuario.correo);
+                if (tabla.Rows.Count >0)
+                {
+                    ViewBag.msg = "Esta cuenta de correo ya esta ligada a un usuario";
+                    return View();
+                }
+                else
+                {
+                    double tmb = 0.0;
+                    double imc = 0.0;
+                    tmb = objMetodos.TMB(ussuario.sexo, ussuario.altura, ussuario.peso, ussuario.frecuencia, ussuario.edad, ussuario.kxp);
+                    imc = objMetodos.IMC(ussuario.peso, ussuario.altura);
+                    objMetodos.Insertar(ussuario.correo, ussuario.contrasena, ussuario.nombreusuario, ussuario.peso, ussuario.altura, ussuario.sexo, ussuario.frecuencia, tmb, imc, ussuario.kxp, ussuario.edad);    
+                    return RedirectToAction("Index");
+                }                 
             }
             else
             {
+                ViewBag.msg = "Debe completar todos los campos";
                 return View();
             }            
         }

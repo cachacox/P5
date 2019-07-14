@@ -1,21 +1,49 @@
-﻿@model P5Parcial.Models.usuario
+﻿@model P5Parcial.Models.parentModel
 
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
+ 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Bootstrap/mycss.css" rel="stylesheet" />
+    <link href="~/Bootstrap/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Bootstrap/bootstrap.css" rel="stylesheet" />
     <title>Ingresar</title>
 </head>
 <body>
-    <div> 
+    <div>
+        @Model.usuario.iduser
+        @Model.MetodosUser.consultaProg(@Model.usuario.iduser)
         <img src="~/imagenes/background.jpg" class="bg" />
-        <div style="position:relative">
-            <p>Hola</p>
+        <div class="row">
+            <div class="col-md-4">
+                <div id="cuadro">
+                    <p>Hola Usuario</p>
+                    <div>
+                        <table>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div> 
+            <div class="col-md-4">
+                <div  id="cuadro">
+                    <p>Su progreso</p>
+                </div>                
+            </div>
+            <div class="col-md-4">
+                <div  id="cuadro">
+                    <p>Su cuadro nutricional</p>
+                </div>                
+            </div>           
         </div>
     </div>
 </body>
