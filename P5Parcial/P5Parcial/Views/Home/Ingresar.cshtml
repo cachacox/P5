@@ -1,4 +1,4 @@
-﻿@model P5Parcial.Models.parentModel
+﻿@model P5Parcial.Models.usuario
 
 @{
     Layout = null;
@@ -15,28 +15,109 @@
 </head>
 <body>
     <div>
-        @Model.usuario.iduser
-        @Model.MetodosUser.consultaProg(@Model.usuario.iduser)
+        <style>
+            table, th, td {
+                border: 1px solid;
+            }
+        </style>
         <img src="~/imagenes/background.jpg" class="bg" />
         <div class="row">
             <div class="col-md-4">
                 <div id="cuadro">
-                    <p>Hola Usuario</p>
+                    <p>Hola: @Model.nombreusuario</p>
                     <div>
                         <table>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>Usuario: </td>
+                                <td>@Model.nombreusuario</td>
+                            </tr>
+                            <tr>
+                                <td>Genero</td>
+                                @if (Model.sexo ==1)
+                                {
+                                    <td>Masculino</td>
+                                }
+                                else if (Model.sexo == 2)
+                                {
+                                    <td>Femenino</td>
+                                }
+                            </tr>
+                            <tr>
+                                <td>Edad: </td>
+                                <td>@Model.edad</td>
+                            </tr>
+                            <tr>
+                                <td>Peso: </td>
+                                <td>@Model.peso</td>
+                            </tr> 
+                            <tr>
+                                <td>Altura: </td>
+                                <td>@Model.altura</td>
+                            </tr>
+                            <tr>
+                                <td>Frecuencia ejercicio: </td>
+                                @switch (Model.frecuencia)
+                                {
+                                    case 1:
+                                        <td>Poco o ningún ejercicio</td>
+                                        break;
+                                    case 2:
+                                        <td>Ejercicio ligero</td>
+                                        break;
+                                    case 3:
+                                        <td>Ejercicio Moderado</td>
+                                        break;
+                                    case 4:
+                                        <td>Ejercicio Fuerte</td>
+                                        break;
+                                    case 5:
+                                        <td>Ejercicio profesional o extremo</td>
+                                        break;
+                                }
+                            </tr>
+                            <tr>
+                                <td>Tasa Metabólica Basal(TMB): </td>
+                                <td>@Model.tmb</td>
+                            </tr> 
+                            <tr>
+                                <td>Indice Masa Corporal(IMC): </td>
+                                <td>@Model.imc</td>
+                            </tr> 
+                            <tr>
+                                <td>Kilos a perder por semana:</td>
+                                @switch (Model.kxp)
+                                {
+                                    case 1:
+                                        <td>1 Kg</td>
+                                        break;
+                                    case 2:
+                                        <td>0.5 Kg</td>
+                                        break;
+                                }
                             </tr>
                         </table>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="col-md-4">
                 <div  id="cuadro">
                     <p>Su progreso</p>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>Su peso actual: </td>
+                                <td>@Model.peso</td>
+                            </tr>
+                            <tr>
+                                <td>Su peso ideal: </td>
+                                <td>@Model.ideal(Model.altura,Model.sexo)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <p>Registre su progreso:</p>
+
                 </div>                
             </div>
             <div class="col-md-4">

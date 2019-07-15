@@ -23,7 +23,7 @@ namespace P5Parcial.Controllers
             return View();
         }
 
-        public ActionResult Ingresar(int id)
+        public ActionResult Ingresar()
         {
             return View();
         }
@@ -34,22 +34,34 @@ namespace P5Parcial.Controllers
         {
             if (!string.IsNullOrEmpty(userr.correo) && !string.IsNullOrEmpty(userr.contrasena))
             {
-                MetodosUser objMetodos = new MetodosUser();
                 DataTable tabla = new DataTable();
                 DataTable temptabla = new DataTable();
                 int idu = 0;
-                tabla = objMetodos.Consulta(userr.correo);
+                DateTime fecha = DateTime.Now;
+                string nombre = userr.correo;
+                tabla = userr.Consulta(nombre);
                 if (tabla.Rows.Count >0)
                 {
                     idu = Convert.ToInt32(tabla.Rows[0][0]);
+
                     if (tabla.Rows[0][1].ToString() == userr.correo && tabla.Rows[0][2].ToString() == userr.contrasena)
                     {
-                        temptabla = objMetodos.consultaProg(idu);
+                        userr.nombreusuario = tabla.Rows[0][3].ToString();
+                        userr.peso = Convert.ToInt32(tabla.Rows[0][4]);
+                        userr.altura = Convert.ToInt32(tabla.Rows[0][5].ToString());
+                        userr.sexo = Convert.ToInt32(tabla.Rows[0][6].ToString());
+                        userr.frecuencia = Convert.ToInt32(tabla.Rows[0][7].ToString());
+                        userr.tmb = Convert.ToDouble(tabla.Rows[0][8].ToString());
+                        userr.imc = Convert.ToDouble(tabla.Rows[0][9].ToString());
+                        userr.edad = Convert.ToInt32(tabla.Rows[0][10].ToString());
+                        userr.kxp = Convert.ToInt32(tabla.Rows[0][11].ToString());
+
+                        temptabla = userr.consultaProg(idu);
                         if (temptabla.Rows.Count == 0)
                         {
-                            objMetodos.InsertarProgreso(idu, Convert.ToInt32(tabla.Rows[0][4]), Convert.ToInt32(tabla.Rows[0][9]));
+                            userr.InsertarProgreso(idu, Convert.ToInt32(tabla.Rows[0][4]), Convert.ToInt32(tabla.Rows[0][9]), fecha);
                         }
-                        return View("Ingresar",idu);
+                        return View("Ingresar", userr);
                     }
                     else
                     {
@@ -71,11 +83,10 @@ namespace P5Parcial.Controllers
         }
 
         public ActionResult Registrar(usuario ussuario) {
-            MetodosUser objMetodos = new MetodosUser();
             DataTable tabla = new DataTable();
             if (ModelState.IsValid)
             {
-                tabla = objMetodos.Consulta(ussuario.correo);
+                tabla = ussuario.Consulta(ussuario.correo);
                 if (tabla.Rows.Count >0)
                 {
                     ViewBag.msg = "Esta cuenta de correo ya esta ligada a un usuario";
@@ -85,9 +96,9 @@ namespace P5Parcial.Controllers
                 {
                     double tmb = 0.0;
                     double imc = 0.0;
-                    tmb = objMetodos.TMB(ussuario.sexo, ussuario.altura, ussuario.peso, ussuario.frecuencia, ussuario.edad, ussuario.kxp);
-                    imc = objMetodos.IMC(ussuario.peso, ussuario.altura);
-                    objMetodos.Insertar(ussuario.correo, ussuario.contrasena, ussuario.nombreusuario, ussuario.peso, ussuario.altura, ussuario.sexo, ussuario.frecuencia, tmb, imc, ussuario.kxp, ussuario.edad);    
+                    tmb = ussuario.TMB(ussuario.sexo, ussuario.altura, ussuario.peso, ussuario.frecuencia, ussuario.edad, ussuario.kxp);
+                    imc = ussuario.IMC(ussuario.peso, ussuario.altura);
+                    ussuario.Insertar(ussuario.correo, ussuario.contrasena, ussuario.nombreusuario, ussuario.peso, ussuario.altura, ussuario.sexo, ussuario.frecuencia, tmb, imc, ussuario.kxp, ussuario.edad);    
                     return RedirectToAction("Index");
                 }                 
             }
