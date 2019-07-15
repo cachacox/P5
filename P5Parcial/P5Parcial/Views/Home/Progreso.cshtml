@@ -12,8 +12,27 @@
     <title>Progreso</title>
 </head>
 <body>
+    <style>
+        table, th, td {
+            border: 1px solid;
+        }
+    </style>
     <div>
-         
+        <table>
+            <tr>
+                <td>Peso</td>
+                <td>IMC</td>
+                <td>Fecha</td>
+            </tr>
+            @for (int i = 0; i < Model.tbl.Rows.Count; i++)
+            {
+               <tr>
+                   <td>@Model.tbl.Rows[0][1]</td>
+                   <td>@Model.tbl.Rows[0][2]</td>
+                   <td>@Model.tbl.Rows[0][3]</td>
+               </tr>
+            }
+        </table> 
     </div>
 </body>
 </html>

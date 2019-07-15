@@ -10,13 +10,16 @@ namespace P5Parcial.Controllers
 {
     public class HomeController : Controller
     {
+        usuario usb = new usuario();
         progreso objprogreso = new progreso();      
         int identificador = 0;
         // GET: Home
         public ActionResult Index()
         {
-            return View();
-            
+            DataTable tabela = new DataTable();
+            tabela = usb.Consulta(usb.correo);
+            identificador = Convert.ToInt32(tabela.Rows[0][0]);
+            return View();            
         }
 
         [HttpGet]
@@ -55,6 +58,7 @@ namespace P5Parcial.Controllers
 
                     if (tabla.Rows[0][1].ToString() == userr.correo && tabla.Rows[0][2].ToString() == userr.contrasena)
                     {
+                        userr.iduser = idu;
                         userr.nombreusuario = tabla.Rows[0][3].ToString();
                         userr.peso = Convert.ToInt32(tabla.Rows[0][4]);
                         userr.altura = Convert.ToInt32(tabla.Rows[0][5].ToString());
@@ -121,7 +125,5 @@ namespace P5Parcial.Controllers
                 return View();
             }            
         }
-
-
     }
 }
