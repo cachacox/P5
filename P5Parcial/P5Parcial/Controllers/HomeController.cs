@@ -10,6 +10,8 @@ namespace P5Parcial.Controllers
 {
     public class HomeController : Controller
     {
+        progreso objprogreso = new progreso();      
+        int identificador = 0;
         // GET: Home
         public ActionResult Index()
         {
@@ -28,8 +30,10 @@ namespace P5Parcial.Controllers
             return View();
         }
 
-        public ActionResult Progreso() {
-            return View();
+        public ActionResult Progreso()
+        {
+            objprogreso.tbl = objprogreso.consultaProg(identificador);            
+            return View(objprogreso);
         }
 
         [HttpPost]
@@ -47,6 +51,7 @@ namespace P5Parcial.Controllers
                 if (tabla.Rows.Count >0)
                 {
                     idu = Convert.ToInt32(tabla.Rows[0][0]);
+                    identificador = Convert.ToInt32(tabla.Rows[0][0]);
 
                     if (tabla.Rows[0][1].ToString() == userr.correo && tabla.Rows[0][2].ToString() == userr.contrasena)
                     {
@@ -116,6 +121,7 @@ namespace P5Parcial.Controllers
                 return View();
             }            
         }
+
 
     }
 }

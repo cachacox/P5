@@ -120,16 +120,16 @@
                     </div>
                 </div>
                 <div id="cuadro">
-                    <p>Registre su progreso:</p>
-
-                </div>                
+                    <p>Registre su progreso</p>
+                    @Html.ActionLink("Registre su Progreso", "Progreso");
+                </div>                             
             </div>
             <div class="col-md-4">
                 <div  id="cuadro">
                     <p>Su cuadro nutricional</p>
                     @if (Model.tmb < 1200)
                     {
-                        <p style="text-align:left">
+                        <p>
                             Desayuno: 1 proteína + 1 fruta (+ verduras, si deseas)<br />
                             Almuerzo: 1 proteína + 1 verdura + ensalada verde + 1 aderezo<br />
                             Bocadillo: 1 bocadillo de proteína + 1 fruta o verdura<br />
