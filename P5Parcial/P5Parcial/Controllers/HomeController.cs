@@ -28,6 +28,10 @@ namespace P5Parcial.Controllers
             return View();
         }
 
+        public ActionResult Progreso() {
+            return View();
+        }
+
         [HttpPost]
 
         public ActionResult Index(usuario userr)
@@ -62,6 +66,7 @@ namespace P5Parcial.Controllers
                         {
                             userr.InsertarProgreso(idu, Convert.ToInt32(tabla.Rows[0][4]), Convert.ToInt32(tabla.Rows[0][9]), fecha);
                         }
+                        ViewBag.tablita = tabla;
                         return View("Ingresar", userr);
                     }
                     else

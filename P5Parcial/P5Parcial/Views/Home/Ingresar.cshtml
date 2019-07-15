@@ -119,7 +119,7 @@
                         </table>
                     </div>
                 </div>
-                <div>
+                <div id="cuadro">
                     <p>Registre su progreso:</p>
 
                 </div>                
@@ -127,7 +127,49 @@
             <div class="col-md-4">
                 <div  id="cuadro">
                     <p>Su cuadro nutricional</p>
-                </div>                
+                    @if (Model.tmb < 1200)
+                    {
+                        <p style="text-align:left">
+                            Desayuno: 1 proteína + 1 fruta (+ verduras, si deseas)<br />
+                            Almuerzo: 1 proteína + 1 verdura + ensalada verde + 1 aderezo<br />
+                            Bocadillo: 1 bocadillo de proteína + 1 fruta o verdura<br />
+                            Cena: 1 proteína + 1 almidón/grano + 2 verduras + ensalada verde + 1 aderezo<br />
+                            Bocadillo: 1 frut
+                        </p>
+                    }
+                    else if (Model.tmb > 1200 && Model.tmb <= 1500)
+                    {
+                        <p>
+                            Desayuno: 1 Proteína + 1 Fruta (+vegetales, si deseas)<br />
+                            Almuerzo: 1 Proteína + 1 Vegetal + ensalada verde +almidón + 1 aderezo +1 fruta<br />
+                            Bocadillo: 1 bocadillo de Proteína + 1 vegetal<br />
+                            Merienda: 1 Proteína+1 Grano/Almidón + 2 Vegetales + Ensalada Verde + 1 aderezo<br />
+                            Bocadillo: 1 Fruta
+                        </p>
+                    }
+                    else if (Model.tmb > 1500 && Model.tmb <= 1800)
+                    {
+                        <p>
+                            Desayuno: 1 Proteína + 1 Fruta (+vegetales, si lo deseas)<br />
+                            Bocadillo: Bocadillo de proteína<br />
+                            Almuerzo: 2 Proteínas + 2 Vegetales + ensalada verde +granos + 1 aderezo +1 fruta<br />
+                            Bocadillo: 1 bocadillo de Proteína + 1 fruta o vegetal<br />
+                            Cena: 2 Proteínas + 1 grano/almidón + 2 Vegetales + Ensalada Verde + 1 Aderezo<br />
+                            Bocadillo: 1 Fruta
+                        </p>
+                    }
+                    else if (Model.tmb > 1800)
+                    {
+                        <p>
+                            Desayuno: 2 Proteína + 1 Fruta (+vegetales, si lo deseas) + 1 granos/almidón<br />
+                            Bocadillo: Bocadillo de proteína<br />
+                            Almuerzo: 2 Proteínas + 2 Vegetales + ensalada verde + 1 grano/almidón + 1 aderezo +1 fruta<br />
+                            Bocadillo: 1 bocadillo de Proteína + 1 fruta o vegetal<br />
+                            Cena: 2 Proteínas + 2 grano/almidón + 2 Vegetales + Ensalada Verde + 1 Aderezo<br />
+                            Bocadillo: 1 Fruta
+                        </p>
+                    }
+         </div>                
             </div>           
         </div>
     </div>

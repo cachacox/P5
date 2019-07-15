@@ -218,6 +218,27 @@ namespace P5Parcial.Models
             }
             return compCorp;
         }
+
+        public int dieta_plan(double tmb_dieta) {
+            int plan = 0;
+            if (tmb_dieta < 1200)
+            {
+                plan = 1;
+            }
+            else if (tmb_dieta >1200 && tmb_dieta <= 1500)
+            {
+                plan = 2;
+            }
+            else if (tmb_dieta >1500 && tmb_dieta <= 1800 )
+            {
+                plan = 3;
+            }
+            else if (tmb_dieta > 1800)
+            {
+                plan = 4;
+            }
+            return plan;
+        }
         public usuario()
         {
             iduser = 0;
