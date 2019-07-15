@@ -55,6 +55,7 @@ namespace P5Parcial.Controllers
                         userr.imc = Convert.ToDouble(tabla.Rows[0][9].ToString());
                         userr.edad = Convert.ToInt32(tabla.Rows[0][10].ToString());
                         userr.kxp = Convert.ToInt32(tabla.Rows[0][11].ToString());
+                        userr.corporal = tabla.Rows[0][12].ToString();
 
                         temptabla = userr.consultaProg(idu);
                         if (temptabla.Rows.Count == 0)
@@ -96,9 +97,11 @@ namespace P5Parcial.Controllers
                 {
                     double tmb = 0.0;
                     double imc = 0.0;
+                    string corporal = "";
                     tmb = ussuario.TMB(ussuario.sexo, ussuario.altura, ussuario.peso, ussuario.frecuencia, ussuario.edad, ussuario.kxp);
                     imc = ussuario.IMC(ussuario.peso, ussuario.altura);
-                    ussuario.Insertar(ussuario.correo, ussuario.contrasena, ussuario.nombreusuario, ussuario.peso, ussuario.altura, ussuario.sexo, ussuario.frecuencia, tmb, imc, ussuario.kxp, ussuario.edad);    
+                    corporal = ussuario.composicionCorporal(imc);
+                    ussuario.Insertar(ussuario.correo, ussuario.contrasena, ussuario.nombreusuario, ussuario.peso, ussuario.altura, ussuario.sexo, ussuario.frecuencia, tmb, imc, ussuario.kxp, ussuario.edad, corporal);    
                     return RedirectToAction("Index");
                 }                 
             }

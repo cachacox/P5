@@ -10,11 +10,16 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Registrar</title>
-    <link href="~/Bootstrap/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="~/Bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="~/Bootstrap/mycss.css" rel="stylesheet" />
 </head>
 <body>
+    <style>
+        table, th, td {
+            border:none;                
+        }
+    </style>
     <div class="cuerpo">
         <div class="row">
             <img class="col-md-6" src="~/imagenes/background1.jpg" />
@@ -40,7 +45,7 @@
                             <td class="margenCol">@Html.TextBoxFor(x => x.peso, new { @class = "form-control" })</td>
                         </tr>
                         <tr>
-                            <td>Altura:     </td>
+                            <td>Altura:   </td>
                             <td class="margenCol">@Html.TextBoxFor(x => x.altura, new { @class = "form-control" })</td>
                         </tr>
                         <tr>

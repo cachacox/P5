@@ -22,6 +22,7 @@ namespace P5Parcial.Models
         public double imc { get; set; }
         public int edad { get; set; }
         public int kxp { get; set; }
+        public string corporal { get; set; }
 
         capaDatos objCapaDatos = new capaDatos();
         public DataTable Consulta(string id = "")
@@ -71,14 +72,14 @@ namespace P5Parcial.Models
             }
         }
 
-        public void Insertar(string correo, string contrasena, string nombreusuario, int peso, int altura, int sexo, int frecuencia, double tmb, double imc, int kxp, int edad)
+        public void Insertar(string correo, string contrasena, string nombreusuario, int peso, int altura, int sexo, int frecuencia, double tmb, double imc, int kxp, int edad, string corporal)
         {
             StringBuilder sqlQuery = new StringBuilder();
             SqlCommand comando = new SqlCommand();
             int resultado = 0;
             try
             {
-                sqlQuery.Append(" insert into usuarios values(@correo, @contrasena, @nombreusuario, @peso, @altura, @sexo, @frecuencia, @tmb, @imc, @edad, @kxp) ");
+                sqlQuery.Append(" insert into usuarios values(@correo, @contrasena, @nombreusuario, @peso, @altura, @sexo, @frecuencia, @tmb, @imc, @edad, @kxp, @corporal) ");
                 comando.Parameters.Add("@correo", SqlDbType.NVarChar).Value = correo.Trim();
                 comando.Parameters.Add("@contrasena", SqlDbType.NVarChar).Value = contrasena.Trim();
                 comando.Parameters.Add("@nombreusuario", SqlDbType.NVarChar).Value = nombreusuario.Trim();
@@ -90,6 +91,7 @@ namespace P5Parcial.Models
                 comando.Parameters.Add("@imc", SqlDbType.Float).Value = imc;
                 comando.Parameters.Add("@edad", SqlDbType.Int).Value = edad;
                 comando.Parameters.Add("@kxp", SqlDbType.Int).Value = kxp;
+                comando.Parameters.Add("@corporal", SqlDbType.NVarChar).Value = corporal;
                 resultado = objCapaDatos.Insertar(sqlQuery, comando);
 
             }
@@ -194,6 +196,28 @@ namespace P5Parcial.Models
             }
             return pesoideal;
         }
+
+        public string composicionCorporal(double imc)
+        {
+            string compCorp = "";
+            if (imc < 18.5)
+            {
+                compCorp = "Peso inferior al normal";
+            }
+            else if (imc>=18.5 && imc <=24.9)
+            {
+                compCorp = "Peso normal";
+            }
+            else if (imc >= 25.0 && imc <= 29.9)
+            {
+                compCorp = "Peso superior al normal";
+            }
+            else if (imc >30.0)
+            {
+                compCorp = "Obesidad";
+            }
+            return compCorp;
+        }
         public usuario()
         {
             iduser = 0;
@@ -208,6 +232,8 @@ namespace P5Parcial.Models
             imc = 0.0;
             edad = 0;
             kxp = 0;
+            corporal = "";
         }
+
     }
 }

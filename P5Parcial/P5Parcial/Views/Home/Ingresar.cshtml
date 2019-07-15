@@ -84,7 +84,7 @@
                                 <td>@Model.imc</td>
                             </tr> 
                             <tr>
-                                <td>Kilos a perder por semana:</td>
+                                <td>Kilos a perder por semana: </td>
                                 @switch (Model.kxp)
                                 {
                                     case 1:
@@ -94,6 +94,10 @@
                                         <td>0.5 Kg</td>
                                         break;
                                 }
+                            </tr>
+                            <tr>
+                                <td>Composición Corporal: </td>
+                                <td>@Model.corporal</td>
                             </tr>
                         </table>
                     </div>
