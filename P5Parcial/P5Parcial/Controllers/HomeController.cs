@@ -14,33 +14,14 @@ namespace P5Parcial.Controllers
         progreso objprogreso = new progreso();      
         int identificador = 0;
         // GET: Home
+
+        [HttpGet]
         public ActionResult Index()
         {
-            DataTable tabela = new DataTable();
-            tabela = usb.Consulta(usb.correo);
-            identificador = Convert.ToInt32(tabela.Rows[0][0]);
             return View();            
         }
 
-        [HttpGet]
-        public ActionResult Registrar()
-        {
-            return View();
-        }
-
-        public ActionResult Ingresar()
-        {
-            return View();
-        }
-
-        public ActionResult Progreso()
-        {
-            objprogreso.tbl = objprogreso.consultaProg(identificador);            
-            return View(objprogreso);
-        }
-
         [HttpPost]
-
         public ActionResult Index(usuario userr)
         {
             if (!string.IsNullOrEmpty(userr.correo) && !string.IsNullOrEmpty(userr.contrasena))
@@ -51,10 +32,11 @@ namespace P5Parcial.Controllers
                 DateTime fecha = DateTime.Now;
                 string nombre = userr.correo;
                 tabla = userr.Consulta(nombre);
-                if (tabla.Rows.Count >0)
+                if (tabla.Rows.Count > 0)
                 {
                     idu = Convert.ToInt32(tabla.Rows[0][0]);
-                    identificador = Convert.ToInt32(tabla.Rows[0][0]);
+                    //ViewBag.identificador = tabla.Rows[0][0];
+                    //identificador = Convert.ToInt32(tabla.Rows[0][0]);
 
                     if (tabla.Rows[0][1].ToString() == userr.correo && tabla.Rows[0][2].ToString() == userr.contrasena)
                     {
@@ -76,7 +58,8 @@ namespace P5Parcial.Controllers
                             userr.InsertarProgreso(idu, Convert.ToInt32(tabla.Rows[0][4]), Convert.ToInt32(tabla.Rows[0][9]), fecha);
                         }
                         ViewBag.tablita = tabla;
-                        return View("Ingresar", userr);
+                        return RedirectToAction("Ingresar",userr);
+                        //return View("Ingresar", userr);
                     }
                     else
                     {
@@ -88,7 +71,7 @@ namespace P5Parcial.Controllers
                 {
                     ViewBag.mensaje = "Usuario no existe, regístrese";
                     return View();
-                }           
+                }
             }
             else
             {
@@ -97,6 +80,27 @@ namespace P5Parcial.Controllers
             }
         }
 
+
+        [HttpGet]
+        public ActionResult Registrar()
+        {
+            return View();
+        }
+        [HttpGet]
+        public ActionResult Ingresar(usuario use)
+        {          
+            return View(use);
+        }
+        [HttpGet]
+        public ActionResult Progreso()
+        {
+            //DataTable tabela = new DataTable();
+            //tabela = usb.Consulta(usb.correo);
+            //identificador = Convert.ToInt32(tabela.Rows[0][0]);
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Registrar(usuario ussuario) {
             DataTable tabla = new DataTable();
             if (ModelState.IsValid)
@@ -124,6 +128,11 @@ namespace P5Parcial.Controllers
                 ViewBag.msg = "Debe completar todos los campos";
                 return View();
             }            
+        }
+
+        [HttpPost]
+        public ActionResult Ingresar(progreso prog) {
+            return View("Progreso");
         }
     }
 }

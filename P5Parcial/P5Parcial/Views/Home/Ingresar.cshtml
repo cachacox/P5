@@ -14,6 +14,8 @@
     <title>Ingresar</title>
 </head>
 <body>
+    @using (Html.BeginForm())
+    {
     <div>
         <style>
             table, th, td {
@@ -33,7 +35,7 @@
                             </tr>
                             <tr>
                                 <td>Genero</td>
-                                @if (Model.sexo ==1)
+                                @if (Model.sexo == 1)
                                 {
                                     <td>Masculino</td>
                                 }
@@ -114,14 +116,15 @@
                             </tr>
                             <tr>
                                 <td>Su peso ideal: </td>
-                                <td>@Model.ideal(Model.altura,Model.sexo)</td>
+                                <td>@Model.ideal(Model.altura, Model.sexo)</td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div id="cuadro">
                     <p>Registre su progreso</p>
-                    @Html.ActionLink("Registre su Progreso", "Progreso");
+                    <input type="submit" value="Aceptar"/>
+                    @*@Html.ActionLink("Registre su Progreso", "Progreso");*@
                 </div>                             
             </div>
             <div class="col-md-4">
@@ -173,5 +176,6 @@
             </div>           
         </div>
     </div>
+    }
 </body>
 </html>

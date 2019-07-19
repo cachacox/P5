@@ -15,14 +15,15 @@
     <script src="~/Bootstrap/bootstrap.js"></script>
 </head>
 <body>
+@using (Html.BeginForm())
+{
     <div class="container">
             <div class="row justify-content-center align-items-center" style="height:100vh">
                 <div class="col-4">
                     <div class="card">
                         <h1 class="row justify-content-center">Bienvenido</h1>
                         <div class="card-body">
-                            @using (Html.BeginForm())
-                            {
+                          
                                 @Html.ValidationSummary()
                             <form action="" autocomplete="off">
                                 <div class="form-group">
@@ -31,19 +32,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Password</label>
-                                    @Html.TextBoxFor(x => x.contrasena, new { @class = "form-control" })
+                                    @Html.TextBoxFor(x => x.contrasena, new { @class = "form-control", @Type = "password" })
                                 </div>
                                 <input class="btn btn-primary" type="submit" value="Login" />
                                 <label style="color:red; display:block">@ViewBag.mensaje</label>
                             </form>
-                            }
+                            
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                         @Html.ActionLink("Regístrese aquí","Registrar")
+                         @Html.ActionLink("Regístrese aquí", "Registrar")
                     </div>
                 </div>
             </div>
     </div>
+}
 </body>
 </html>
