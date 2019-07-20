@@ -16,26 +16,26 @@ namespace P5Parcial.Models
         public DateTime fecha{ get; set; }
         public DataTable tbl { get; set; }
 
-        public DataTable consultaProg(int id)
-        {
-            capaDatos objCapaDatos = new capaDatos();
-            StringBuilder sqlQuery = new StringBuilder();
-            SqlCommand comando = new SqlCommand();
-            DataTable tabla = new DataTable();
-            try
-            {
-                sqlQuery.Append(" Select * from progreso where iduser = @usuario ");
-                if (id > 0)
-                {
-                    comando.Parameters.Add("@usuario", SqlDbType.Int).Value = id;
-                    tabla = objCapaDatos.EjecutarConsulta(sqlQuery, comando);
-                }
-                return tabla;
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error en la consulta");
-            }
-        }
+        //public DataTable consultaProg(int id)
+        //{
+        //    capaDatos objCapaDatos = new capaDatos();
+        //    StringBuilder sqlQuery = new StringBuilder();
+        //    SqlCommand comando = new SqlCommand();
+        //    DataTable tabla = new DataTable();
+        //    try
+        //    {
+        //        sqlQuery.Append(" Select * from progreso where iduser = @usuario ");
+        //        if (id > 0)
+        //        {
+        //            comando.Parameters.Add("@usuario", SqlDbType.Int).Value = id;
+        //            tabla = objCapaDatos.EjecutarConsulta(sqlQuery, comando);
+        //        }
+        //        return tabla;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw new Exception("Error en la consulta");
+        //    }
+        //}
     }
 }

@@ -10,11 +10,7 @@ namespace P5Parcial.Controllers
 {
     public class HomeController : Controller
     {
-        usuario usb = new usuario();
-        progreso objprogreso = new progreso();      
-        int identificador = 0;
         // GET: Home
-
         [HttpGet]
         public ActionResult Index()
         {
@@ -26,18 +22,15 @@ namespace P5Parcial.Controllers
         {
             if (!string.IsNullOrEmpty(userr.correo) && !string.IsNullOrEmpty(userr.contrasena))
             {
+                int idu = 0;
                 DataTable tabla = new DataTable();
                 DataTable temptabla = new DataTable();
-                int idu = 0;
                 DateTime fecha = DateTime.Now;
                 string nombre = userr.correo;
                 tabla = userr.Consulta(nombre);
                 if (tabla.Rows.Count > 0)
                 {
                     idu = Convert.ToInt32(tabla.Rows[0][0]);
-                    //ViewBag.identificador = tabla.Rows[0][0];
-                    //identificador = Convert.ToInt32(tabla.Rows[0][0]);
-
                     if (tabla.Rows[0][1].ToString() == userr.correo && tabla.Rows[0][2].ToString() == userr.contrasena)
                     {
                         userr.iduser = idu;
@@ -57,9 +50,7 @@ namespace P5Parcial.Controllers
                         {
                             userr.InsertarProgreso(idu, Convert.ToInt32(tabla.Rows[0][4]), Convert.ToInt32(tabla.Rows[0][9]), fecha);
                         }
-                        ViewBag.tablita = tabla;
                         return RedirectToAction("Ingresar",userr);
-                        //return View("Ingresar", userr);
                     }
                     else
                     {
@@ -88,18 +79,10 @@ namespace P5Parcial.Controllers
         }
         [HttpGet]
         public ActionResult Ingresar(usuario use)
-        {          
+        {
+            use.usetbl = use.consultaProg(use.iduser);
             return View(use);
         }
-        [HttpGet]
-        public ActionResult Progreso()
-        {
-            //DataTable tabela = new DataTable();
-            //tabela = usb.Consulta(usb.correo);
-            //identificador = Convert.ToInt32(tabela.Rows[0][0]);
-            return View();
-        }
-
         [HttpPost]
         public ActionResult Registrar(usuario ussuario) {
             DataTable tabla = new DataTable();
@@ -131,8 +114,8 @@ namespace P5Parcial.Controllers
         }
 
         [HttpPost]
-        public ActionResult Ingresar(progreso prog) {
-            return View("Progreso");
+        public ActionResult Ingresar() {
+            return RedirectToAction("Ingresar");
         }
     }
 }

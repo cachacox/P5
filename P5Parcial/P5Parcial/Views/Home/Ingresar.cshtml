@@ -79,7 +79,7 @@
                             </tr>
                             <tr>
                                 <td>Tasa Metabólica Basal(TMB): </td>
-                                <td>@Model.tmb</td>
+                                <td>@Model.tmb.</td>
                             </tr> 
                             <tr>
                                 <td>Indice Masa Corporal(IMC): </td>
@@ -122,9 +122,27 @@
                     </div>
                 </div>
                 <div id="cuadro">
-                    <p>Registre su progreso</p>
+                    <div>
+                        <p>Registre su progreso</p>
+                       <table>
+                           <tr>
+                               <td>N°</td>
+                               <td>Peso</td>
+                               <td>IMC</td>
+                               <td>Fecha</td>
+                           </tr>
+                           @for (int i = 0; i < Model.usetbl.Rows.Count; i++)
+                           {
+                               <tr>
+                                   <td>@Model.usetbl.Rows[0][0]</td>
+                                   <td>@Model.usetbl.Rows[0][1]</td>
+                                   <td>@Model.usetbl.Rows[0][2]</td>
+                                   <td>@Model.usetbl.Rows[0][3]</td>
+                               </tr>
+                           }
+                       </table>
+                    </div>                    
                     <input type="submit" value="Aceptar"/>
-                    @*@Html.ActionLink("Registre su Progreso", "Progreso");*@
                 </div>                             
             </div>
             <div class="col-md-4">
