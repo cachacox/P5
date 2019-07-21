@@ -28,27 +28,16 @@ namespace P5Parcial.Controllers
                 DateTime fecha = DateTime.Now;
                 string nombre = userr.correo;
                 tabla = userr.Consulta(nombre);
+                usuario.tablamain = userr.Consulta(nombre);
                 if (tabla.Rows.Count > 0)
                 {
                     idu = Convert.ToInt32(tabla.Rows[0][0]);
-                    if (tabla.Rows[0][1].ToString() == userr.correo && tabla.Rows[0][2].ToString() == userr.contrasena)
+                    if (usuario.tablamain.Rows[0][1].ToString() == userr.correo && usuario.tablamain.Rows[0][2].ToString() == userr.contrasena)
                     {
-                        userr.iduser = idu;
-                        userr.nombreusuario = tabla.Rows[0][3].ToString();
-                        userr.peso = Convert.ToInt32(tabla.Rows[0][4]);
-                        userr.altura = Convert.ToInt32(tabla.Rows[0][5].ToString());
-                        userr.sexo = Convert.ToInt32(tabla.Rows[0][6].ToString());
-                        userr.frecuencia = Convert.ToInt32(tabla.Rows[0][7].ToString());
-                        userr.tmb = Convert.ToDouble(tabla.Rows[0][8].ToString());
-                        userr.imc = Convert.ToDouble(tabla.Rows[0][9].ToString());
-                        userr.edad = Convert.ToInt32(tabla.Rows[0][10].ToString());
-                        userr.kxp = Convert.ToInt32(tabla.Rows[0][11].ToString());
-                        userr.corporal = tabla.Rows[0][12].ToString();
-
-                        temptabla = userr.consultaProg(idu);
-                        if (temptabla.Rows.Count == 0)
+                        usuario.usetbl = userr.consultaProg(Convert.ToInt32(usuario.tablamain.Rows[0][0]));
+                        if (usuario.usetbl.Rows.Count == 0)
                         {
-                            userr.InsertarProgreso(idu, Convert.ToInt32(tabla.Rows[0][4]), Convert.ToInt32(tabla.Rows[0][9]), fecha);
+                            userr.InsertarProgreso(idu, Convert.ToInt32(usuario.tablamain.Rows[0][4]), Convert.ToInt32(usuario.tablamain.Rows[0][9]), fecha);
                         }
                         return RedirectToAction("Ingresar",userr);
                     }
@@ -71,7 +60,6 @@ namespace P5Parcial.Controllers
             }
         }
 
-
         [HttpGet]
         public ActionResult Registrar()
         {
@@ -80,7 +68,7 @@ namespace P5Parcial.Controllers
         [HttpGet]
         public ActionResult Ingresar(usuario use)
         {
-            use.usetbl = use.consultaProg(use.iduser);
+            //int progreso = use.peso;
             return View(use);
         }
         [HttpPost]
@@ -114,7 +102,7 @@ namespace P5Parcial.Controllers
         }
 
         [HttpPost]
-        public ActionResult Ingresar() {
+        public ActionResult Ingresar() {            
             return RedirectToAction("Ingresar");
         }
     }

@@ -26,39 +26,39 @@
         <div class="row">
             <div class="col-md-4">
                 <div id="cuadro">
-                    <p>Hola: @Model.nombreusuario</p>
+                    <p>Hola: @P5Parcial.Models.usuario.tablamain.Rows[0][3]</p>
                     <div>
                         <table>
                             <tr>
                                 <td>Usuario: </td>
-                                <td>@Model.nombreusuario</td>
+                                <td>@P5Parcial.Models.usuario.tablamain.Rows[0][3]</td>
                             </tr>
                             <tr>
                                 <td>Genero</td>
-                                @if (Model.sexo == 1)
+                                @if (Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][6]) == 1)
                                 {
                                     <td>Masculino</td>
                                 }
-                                else if (Model.sexo == 2)
+                                else if (Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][6]) == 2)
                                 {
                                     <td>Femenino</td>
                                 }
                             </tr>
                             <tr>
                                 <td>Edad: </td>
-                                <td>@Model.edad</td>
+                                <td>@P5Parcial.Models.usuario.tablamain.Rows[0][10]</td>
                             </tr>
                             <tr>
                                 <td>Peso: </td>
-                                <td>@Model.peso</td>
+                                <td>@P5Parcial.Models.usuario.tablamain.Rows[0][4]</td>
                             </tr> 
                             <tr>
                                 <td>Altura: </td>
-                                <td>@Model.altura</td>
+                                <td>@P5Parcial.Models.usuario.tablamain.Rows[0][5]</td>
                             </tr>
                             <tr>
                                 <td>Frecuencia ejercicio: </td>
-                                @switch (Model.frecuencia)
+                                @switch (Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][7]))
                                 {
                                     case 1:
                                         <td>Poco o ningún ejercicio</td>
@@ -79,15 +79,15 @@
                             </tr>
                             <tr>
                                 <td>Tasa Metabólica Basal(TMB): </td>
-                                <td>@Model.tmb.</td>
+                                <td>@P5Parcial.Models.usuario.tablamain.Rows[0][8]</td>
                             </tr> 
                             <tr>
                                 <td>Indice Masa Corporal(IMC): </td>
-                                <td>@Model.imc</td>
+                                <td>@P5Parcial.Models.usuario.tablamain.Rows[0][9]</td>
                             </tr> 
                             <tr>
                                 <td>Kilos a perder por semana: </td>
-                                @switch (Model.kxp)
+                                @switch (Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][11]))
                                 {
                                     case 1:
                                         <td>1 Kg</td>
@@ -99,7 +99,7 @@
                             </tr>
                             <tr>
                                 <td>Composición Corporal: </td>
-                                <td>@Model.corporal</td>
+                                <td>@P5Parcial.Models.usuario.tablamain.Rows[0][12]</td>
                             </tr>
                         </table>
                     </div>
@@ -107,23 +107,24 @@
             </div>
             <div class="col-md-4">
                 <div  id="cuadro">
-                    <p>Su progreso</p>
+                    <p style="text-align:center">Su progreso</p>
                     <div>
                         <table>
                             <tr>
                                 <td>Su peso actual: </td>
-                                <td>@Model.peso</td>
+                                <td>@P5Parcial.Models.usuario.tablamain.Rows[0][4]</td>
                             </tr>
                             <tr>
                                 <td>Su peso ideal: </td>
-                                <td>@Model.ideal(Model.altura, Model.sexo)</td>
+                                <td>@Model.ideal(Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][5]), Convert.ToInt32(Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][6])))</td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div id="cuadro">
                     <div>
-                        <p>Registre su progreso</p>
+                        <p style="text-align:center">Registre su progreso</p>
+                        <br />
                        <table>
                            <tr>
                                <td>N°</td>
@@ -131,24 +132,32 @@
                                <td>IMC</td>
                                <td>Fecha</td>
                            </tr>
-                           @for (int i = 0; i < Model.usetbl.Rows.Count; i++)
+                           @for (int i = 0; i < P5Parcial.Models.usuario.usetbl.Rows.Count; i++)
                            {
                                <tr>
-                                   <td>@Model.usetbl.Rows[0][0]</td>
-                                   <td>@Model.usetbl.Rows[0][1]</td>
-                                   <td>@Model.usetbl.Rows[0][2]</td>
-                                   <td>@Model.usetbl.Rows[0][3]</td>
+
+                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[0][0]</td>
+                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[0][1]</td>
+                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[0][2]</td>
+                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[0][3]</td>
                                </tr>
                            }
                        </table>
-                    </div>                    
-                    <input type="submit" value="Aceptar"/>
+                    </div> 
+                    <div>
+                        @Html.ValidationSummary()
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Registre su peso</label>
+                            @Html.TextBoxFor(Model => Model.peso, new { @class = "form-control" })
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Registrar" />
+                    </div>                   
                 </div>                             
             </div>
             <div class="col-md-4">
                 <div  id="cuadro">
                     <p>Su cuadro nutricional</p>
-                    @if (Model.tmb < 1200)
+                    @if (Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][8]) < 1200)
                     {
                         <p>
                             Desayuno: 1 proteína + 1 fruta (+ verduras, si deseas)<br />
@@ -158,7 +167,7 @@
                             Bocadillo: 1 frut
                         </p>
                     }
-                    else if (Model.tmb > 1200 && Model.tmb <= 1500)
+                    else if (Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][8]) > 1200 && Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][8]) <= 1500)
                     {
                         <p>
                             Desayuno: 1 Proteína + 1 Fruta (+vegetales, si deseas)<br />
@@ -168,7 +177,7 @@
                             Bocadillo: 1 Fruta
                         </p>
                     }
-                    else if (Model.tmb > 1500 && Model.tmb <= 1800)
+                    else if (Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][8]) > 1500 && Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][8]) <= 1800)
                     {
                         <p>
                             Desayuno: 1 Proteína + 1 Fruta (+vegetales, si lo deseas)<br />
@@ -179,7 +188,7 @@
                             Bocadillo: 1 Fruta
                         </p>
                     }
-                    else if (Model.tmb > 1800)
+                    else if (Convert.ToInt32(@P5Parcial.Models.usuario.tablamain.Rows[0][8]) > 1800)
                     {
                         <p>
                             Desayuno: 2 Proteína + 1 Fruta (+vegetales, si lo deseas) + 1 granos/almidón<br />

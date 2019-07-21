@@ -23,7 +23,9 @@ namespace P5Parcial.Models
         public int edad { get; set; }
         public int kxp { get; set; }
         public string corporal { get; set; }
-        public DataTable usetbl { get; set; }
+        public static DataTable usetbl { get; set; }
+        public static DataTable tablamain { get; set; }
+        public static int pesoReg { get; set; }
 
         capaDatos objCapaDatos = new capaDatos();
         public DataTable Consulta(string id = "")
