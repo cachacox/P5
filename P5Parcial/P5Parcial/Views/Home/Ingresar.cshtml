@@ -148,7 +148,10 @@
                         @Html.ValidationSummary()
                         <div class="form-group">
                             <label for="exampleInputEmail1">Registre su peso</label>
-                            @Html.TextBoxFor(Model => Model.peso, new { @class = "form-control" })
+                            @{
+                                @Html.TextBoxFor(x => x.peso, new { @class = "form-control" })
+                                P5Parcial.Models.usuario.pesoReg = @Model.peso;
+                             }                                                       
                         </div>
                         <input class="btn btn-primary" type="submit" value="Registrar" />
                     </div>                   

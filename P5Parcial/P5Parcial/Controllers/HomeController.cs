@@ -16,7 +16,6 @@ namespace P5Parcial.Controllers
         {
             return View();            
         }
-
         [HttpPost]
         public ActionResult Index(usuario userr)
         {
@@ -59,7 +58,6 @@ namespace P5Parcial.Controllers
                 return View();
             }
         }
-
         [HttpGet]
         public ActionResult Registrar()
         {
@@ -68,7 +66,7 @@ namespace P5Parcial.Controllers
         [HttpGet]
         public ActionResult Ingresar(usuario use)
         {
-            //int progreso = use.peso;
+            usuario.usetbl = use.consultaProg(Convert.ToInt32(usuario.tablamain.Rows[0][0]));
             return View(use);
         }
         [HttpPost]
@@ -100,9 +98,8 @@ namespace P5Parcial.Controllers
                 return View();
             }            
         }
-
         [HttpPost]
-        public ActionResult Ingresar() {            
+        public ActionResult Ingresar() {          
             return RedirectToAction("Ingresar");
         }
     }
