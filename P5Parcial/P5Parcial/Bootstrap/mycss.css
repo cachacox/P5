@@ -9,6 +9,13 @@
     padding-left: 50px;
 }
 
+.salir {
+    display: block;
+    font-weight: 400;
+    color: #212529;
+    margin: 0 auto;
+}
+
 img.bg {
     /* fill del background */
     min-height: 100%;

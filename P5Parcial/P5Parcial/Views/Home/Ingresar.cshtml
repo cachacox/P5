@@ -14,8 +14,6 @@
     <title>Ingresar</title>
 </head>
 <body>
-    @using (Html.BeginForm())
-    {
     <div>
         <style>
             table, th, td {
@@ -104,6 +102,11 @@
                         </table>
                     </div>
                 </div>
+                <div id="cuadro">
+                    <form action="salir" method="post">
+                        <input style="display:block;margin:0 auto" type="submit" value="Salir" />
+                    </form>
+                </div>
             </div>
             <div class="col-md-4">
                 <div  id="cuadro">
@@ -134,26 +137,25 @@
                            </tr>
                            @for (int i = 0; i < P5Parcial.Models.usuario.usetbl.Rows.Count; i++)
                            {
+                               var numeropos = i + 1;
                                <tr>
-
-                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[0][0]</td>
-                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[0][1]</td>
-                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[0][2]</td>
-                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[0][3]</td>
+                                   <td>@numeropos</td>
+                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[i][1]</td>
+                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[i][2]</td>
+                                   <td>@P5Parcial.Models.usuario.usetbl.Rows[i][3]</td>
                                </tr>
                            }
                        </table>
                     </div> 
                     <div>
-                        @Html.ValidationSummary()
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Registre su peso</label>
-                            @{
-                                @Html.TextBoxFor(x => x.peso, new { @class = "form-control" })
-                                P5Parcial.Models.usuario.pesoReg = @Model.peso;
-                             }                                                       
-                        </div>
-                        <input class="btn btn-primary" type="submit" value="Registrar" />
+                        <br />
+                        <form action="renovarProg" method="post">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Registre su peso</label>
+                                <input type="number" name="nuevopeso" placeholder="Registre su peso" />
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Registrar" />                            
+                        </form>                    
                     </div>                   
                 </div>                             
             </div>
@@ -206,6 +208,5 @@
             </div>           
         </div>
     </div>
-    }
 </body>
 </html>

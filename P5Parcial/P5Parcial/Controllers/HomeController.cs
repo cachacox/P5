@@ -102,5 +102,18 @@ namespace P5Parcial.Controllers
         public ActionResult Ingresar() {          
             return RedirectToAction("Ingresar");
         }
+
+        public ActionResult renovarProg(int nuevopeso) {
+            progreso objProg = new progreso();
+            DateTime fecha = DateTime.Now;
+            double nuevoimc = 0.0;
+            nuevoimc = objProg.IMC(nuevopeso, Convert.ToInt32(usuario.tablamain.Rows[0][5]));
+            objProg.InsertarProgreso(Convert.ToInt32(usuario.tablamain.Rows[0][0]), nuevopeso,nuevoimc, fecha);  
+            return RedirectToAction("Ingresar");
+        }
+
+        public ActionResult salir() {
+            return RedirectToAction("Index");
+        }
     }
 }
